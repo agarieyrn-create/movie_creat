@@ -1,0 +1,26 @@
+{
+  "name": "movie_creat",
+  "version": "1.0.0",
+  "description": "Remotion video generation pipeline with ElevenLabs TTS",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "build": "remotion render src/index.ts Main output/output.mp4 --width=1080 --height=1920",
+    "pipeline": "ts-node scripts/run-pipeline.ts",
+    "pipeline:voice": "TTS_PROVIDER=voicevox ts-node scripts/run-pipeline.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "remotion": "^4.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

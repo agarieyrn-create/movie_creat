@@ -1,0 +1,14 @@
+[
+  {
+    "speaker": "momo",
+    "text": "今日はAIについて話すよ。",
+    "displayText": "今日はAIについて話すよ。",
+    "pauseAfter": 0.5
+  },
+  {
+    "speaker": "popo",
+    "text": "どんな話か楽しみだね！",
+    "displayText": "どんな話か楽しみだね！",
+    "pauseAfter": 0.3
+  }
+]
