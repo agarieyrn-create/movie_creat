@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { generateAudioElevenLabs } from '../src/tts/elevenlabs';
+import { postToAllSNS } from './post-sns';
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
@@ -70,7 +71,18 @@ async function main() {
       { stdio: 'inherit' }
     );
 
-    await notify(`✅ 完成: ${outputPath}`);
+    // SNS自動投稿（YouTube Shorts / Twitter / TikTok）
+    const firstLine = lines[0]?.displayText ?? lines[0]?.text ?? '動画';
+    const snsResults = await postToAllSNS({
+      videoPath: path.resolve(outputPath),
+      title: `${firstLine.slice(0, 50)} #Shorts`,
+      description: lines.map((l: any) => l.displayText || l.text).join('\n'),
+      tags: ['AI', 'Shorts', 'Japanese'],
+      hashtags: ['#Shorts', '#AI', '#shorts'],
+    });
+
+    const successCount = snsResults.filter((r) => r.success).length;
+    await notify(`✅ 完成: ${outputPath}\n📱 SNS投稿: ${successCount}/3 成功`);
     console.log(`Done: ${outputPath}`);
 
   } catch (err: any) {
